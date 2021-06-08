@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Examen3EV.csproj">
+    <ProjectReference Include="..\ClassLibrary1\Examen3EV_CGC_2021.csproj">
       <Project>{103e5183-c167-47c0-a02a-d4d7409b8589}</Project>
-      <Name>Examen3EV</Name>
+      <Name>Examen3EV_CGC_2021</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

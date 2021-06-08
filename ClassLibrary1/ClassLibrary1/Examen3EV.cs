@@ -1,34 +1,85 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Examen3EV_NS
 {
-    public class estNot  // esta clase nos calcula las estadísticas de un conjunto de notas 
+    /// <summary>
+    /// Esta clase nos calcula las estadísticas de un conjunto de notas 
+    /// </summary>
+    /// <remarks>Podremos introducir suspensos, aprobados, notables y/o sobresalientes</remarks>
+    public class EstNot   
     {
-        public int sus;  // Suspensos
-        public int apr;  // Aprobados
-        public int not;  // Notables
-        public int sbr;  // Sobresalientes
+        private int suspensos;  
+        private int aprobados;  
+        private int notables;  
+        private int sobresalientes;  
 
-        public double media; // Nota media
+        private double media; 
 
-        // Constructor vacío
-        public estNot()
+        public int Suspensos
         {
-            sus = apr = not = sbr = 0;  // inicializamos las variables
-            media = 0.0;
+            get { return suspensos; }
+            set { this.suspensos = value; }
+        }
+        public int Aprobados
+        {
+            get { return aprobados;  }
+            set {this.aprobados = value; }
+        }
+        public int Notables 
+        {
+            get { return notables; }
+            set { this.notables = value; } 
+        }
+        public int Sobresalientes 
+        {
+            get { return sobresalientes; }
+            set { this.sobresalientes = value; } 
         }
 
-        // Constructor a partir de un array, calcula las estadísticas al crear el objeto
-        public estNot(List<int> listnot)
+        public double Media 
         {
-            media = 0.0;
+            get { return media; }
+            set { this.media = value; } 
+        }
 
+        /// <summary>
+        /// En este constructor inicializaremos las variables para no tener que darles valor más adelante
+        /// </summary>
+        public EstNot()
+        {
+            this.suspensos = 0;
+            this.aprobados = 0;
+            this.notables = 0;
+            this.sobresalientes = 0;
+            this.media = 0.0;
+            
+        }
+        /// <summary>
+        /// Constructor a partir de un array, calcula las estadísticas al crear el objeto
+        /// </summary>
+        /// <param name="listnot"></param>
+        public EstNot(List<int> listnot)
+        {
+            
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5) sus++;              // Por debajo de 5 suspenso
-                else if (listnot[i] > 5 && listnot[i] < 7) apr++;// Nota para aprobar: 5
-                else if (listnot[i] > 7 && listnot[i] < 9) not++;// Nota para notable: 7
-                else if (listnot[i] > 9) sbr++;         // Nota para sobresaliente: 9
+                if (listnot[i] < 5)
+                {
+                    suspensos++; // Por debajo de 5 suspenso
+                }
+                else if (listnot[i] > 5 && listnot[i] < 7)
+                {
+                    aprobados++; // Nota para aprobar: 5
+                }
+                else if (listnot[i] > 7 && listnot[i] < 9)
+                {
+                    notables++; // Nota para notable: 7
+                }
+                else if (listnot[i] > 9)
+                {
+                    sobresalientes++;  // Nota para sobresaliente: 9
+                }
 
                 media = media + listnot[i];
             }
@@ -36,30 +87,48 @@ namespace Examen3EV_NS
             media = media / listnot.Count;
         }
 
+        /// <summary>
+        /// Para un conjunto de lista de notas, calculamos las estadísticas
+        /// Calcula la media y el número de suspensos/aprobados/notables/sobresalientes
+        /// </summary>
+        /// <remarks>Introducir valores comprendidos entre 0 y 10</remarks>
+        /// <param name="listnot"></param>
+        /// <returns>El método devuelve una excepción si ha habido algún problema, la media en caso contrario</returns>
+        public double CalcMedia(List<int> listnot)
+        {     
+            
+            if (listnot.Count <= 0)
+            {
+                throw new Exception("La lista no contiene elementos");
+            }
 
-        // Para un conjunto de listnot, calculamos las estadísticas
-        // calcula la media y el número de suspensos/aprobados/notables/sobresalientes
-        //
-        // El método devuelve -1 si ha habido algún problema, la media en caso contrario	
-        public double calcEst(List<int> listnot)
-        {                                 
-            media = 0.0;
+            for (int i = 0; i < 10; i++)
+            {
+                if (listnot[i] < 0 || listnot[i] > 10)
+                { 
+                    throw new ArgumentOutOfRangeException("Los valores no están entre 0 y 10");
+                }
+            }
 
-            // TODO: hay que modificar el tratamiento de errores para generar excepciones
-            //
-            if (listnot.Count <= 0)  // Si la lista no contiene elementos, devolvemos un error
-                return -1;
-
-            for (int i=0;i<10;i++)
-                if (listnot[i] < 0 || listnot[i] > 10)      // comprobamos que las not están entre 0 y 10 (mínimo y máximo), si no, error
-                return -1;
-
+          
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5) sus++;              // Por debajo de 5 suspenso
-                else if (listnot[i] >= 5 && listnot[i] < 7) apr++;// Nota para aprobar: 5
-                else if (listnot[i] >= 7 && listnot[i] < 9) not++;// Nota para notable: 7
-                else if (listnot[i] > 9) sbr++;         // Nota para sobresaliente: 9
+                if (listnot[i] < 5)
+                {
+                    suspensos++;
+                }// Por debajo de 5 suspenso
+                else if (listnot[i] >= 5 && listnot[i] < 7)
+                {
+                    aprobados++;// Nota para aprobar: 5
+                }
+                else if (listnot[i] >= 7 && listnot[i] < 9)
+                {
+                    notables++;
+                } // Nota para notable: 7
+                else if (listnot[i] > 9)
+                {
+                    sobresalientes++;
+                }// Nota para sobresaliente: 9
 
                 media = media + listnot[i];
             }
