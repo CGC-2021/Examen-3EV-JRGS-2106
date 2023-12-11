@@ -113,7 +113,7 @@ namespace Examen3EV_NS
           
             for (int i = 0; i < listnot.Count; i++)
             {
-                if (listnot[i] < 5)
+                if (listnot[i] <= 5)// Pongo un <= en esta linea
                 {
                     suspensos++;
                 }// Por debajo de 5 suspenso
